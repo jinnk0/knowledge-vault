@@ -1,0 +1,8 @@
+# 개인 작업 규칙 파일
+CLAUDE.md
+.claude/
+Inbox.md
+
+# Obsidian 워크스페이스/휴지통 (기기마다 달라서 굳이 동기화할 필요 없음)
+.obsidian/workspace*
+.trash/

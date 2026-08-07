@@ -4,7 +4,7 @@ tags: [python, numpy]
 publish: true
 ---
 
-[[Python/Python.md|Python]]에서 NumPy 배열은 리스트의 대안으로 쓰인다. 속도가 빠르고 다루기 쉬우며, 배열 전체에 대해 한 번에 연산을 수행할 수 있다.
+[[Python/Python.md|Python]]에서 NumPy 배열은 [[Python/컬렉션/리스트.md|리스트]]의 대안으로 쓰인다. 속도가 빠르고 다루기 쉬우며, 배열 전체에 대해 한 번에 연산을 수행할 수 있다.
 
 NumPy의 배열 객체는 `ndarray`라 부르며, `array()` 함수로 생성한다.
 

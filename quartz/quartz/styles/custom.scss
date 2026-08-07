@@ -1,3 +1,119 @@
 @use "./variables.scss" as *;
 
-// put your custom CSS here!
+// ---------------------------------------------------------------------------
+// 1. 본문 가독성 — 줄간격을 여유있게
+// ---------------------------------------------------------------------------
+.page > #quartz-body .center {
+  & p,
+  & li,
+  & blockquote {
+    line-height: 1.68;
+  }
+
+  & p {
+    margin: 1.1em 0;
+  }
+
+  & li {
+    margin: 0.4em 0;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 2. 콘텐츠 ↔ 사이드바 여백 넓히기
+//    base.scss의 그리드 column-gap이 5px로 매우 좁다.
+// ---------------------------------------------------------------------------
+.page > #quartz-body {
+  @media all and ($desktop) {
+    column-gap: 3rem;
+  }
+  @media all and ($tablet) {
+    column-gap: 2rem;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 3. 사이드바 패널을 카드처럼
+// ---------------------------------------------------------------------------
+$panel-radius: 8px;
+
+@mixin panel-card {
+  border: 1px solid var(--lightgray);
+  border-radius: $panel-radius;
+  background-color: var(--light);
+  padding: 1rem 1.1rem;
+  box-sizing: border-box;
+}
+
+.page > #quartz-body .sidebar.right {
+  & > .graph,
+  & > .backlinks,
+  & > .toc {
+    @include panel-card;
+  }
+
+  // 카드 안에서 제목이 위쪽에 붙어 보이지 않도록
+  & h3 {
+    margin-top: 0;
+  }
+}
+
+// 그래프 컴포넌트가 자체 border/radius를 갖고 있어서, 카드 안에서는 중복된다.
+// 안쪽 테두리는 지우고 바깥 카드 테두리만 남긴다.
+.graph > .graph-outer {
+  border-radius: calc(#{$panel-radius} - 2px);
+  border-color: var(--lightgray);
+  background-color: var(--light);
+}
+
+// 전체 그래프 모달도 같은 톤으로
+.graph > .global-graph-outer > .global-graph-container {
+  border-radius: $panel-radius;
+  border: 1px solid var(--lightgray);
+}
+
+// ---------------------------------------------------------------------------
+// 4. 홈페이지 히어로 그래프
+//    quartz.ts에서 beforeBody(=.page-header)에 넣은 그래프만 크게 키운다.
+//    사이드바 그래프는 .sidebar.right 안에 있으므로 영향받지 않는다.
+// ---------------------------------------------------------------------------
+// .graph는 .page-header 바로 아래가 아니라 .popover-hint 안에 들어가므로
+// 자식 결합자(>)가 아닌 하위 선택자를 써야 한다.
+body[data-slug="index"] .page-header .graph {
+  margin: 1.5rem 0 0.5rem;
+
+  // "Graph View" 제목은 히어로에서는 군더더기
+  & > h3 {
+    display: none;
+  }
+
+  & > .graph-outer {
+    height: clamp(340px, 55vh, 560px);
+    margin: 0;
+    border: 1px solid var(--lightgray);
+    border-radius: $panel-radius;
+    // 배경에 팔레트 색을 아주 옅게 깔아 카드처럼 떠 보이게
+    background: linear-gradient(
+      160deg,
+      color-mix(in srgb, var(--secondary) 7%, var(--light)) 0%,
+      var(--light) 60%
+    );
+  }
+
+  // 전체 그래프 버튼이 넓은 카드에서 너무 구석에 박히지 않도록
+  & .global-graph-icon {
+    margin: 0.6rem;
+  }
+
+  @media all and ($mobile) {
+    & > .graph-outer {
+      height: 55vh;
+    }
+  }
+}
+
+// 홈페이지는 사이드바 그래프가 빠지므로 오른쪽 사이드바가 허전해진다.
+// 남은 패널이 위로 붙도록 정렬.
+body[data-slug="index"] .sidebar.right {
+  justify-content: flex-start;
+}

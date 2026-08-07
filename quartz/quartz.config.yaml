@@ -21,30 +21,30 @@ configuration:
     fontOrigin: googleFonts
     cdnCaching: true
     typography:
-      header: Schibsted Grotesk
-      body: Source Sans Pro
-      code: IBM Plex Mono
+      header: Space Grotesk
+      body: Inter
+      code: JetBrains Mono
     colors:
       lightMode:
-        light: "#faf8f8"
-        lightgray: "#e5e5e5"
-        gray: "#b8b8b8"
-        darkgray: "#4e4e4e"
-        dark: "#2b2b2b"
-        secondary: "#284b63"
-        tertiary: "#84a59d"
-        highlight: rgba(143, 159, 169, 0.15)
-        textHighlight: "#fff23688"
+        light: "#FAF7FC"
+        lightgray: "#E9E2F0"
+        gray: "#A99BC0"
+        darkgray: "#6B5E82"
+        dark: "#3A324D"
+        secondary: "#9B7FD4"
+        tertiary: "#F2B8C6"
+        highlight: "#FDE8D6"
+        textHighlight: "#F2B8C688"
       darkMode:
-        light: "#161618"
-        lightgray: "#393639"
-        gray: "#646464"
-        darkgray: "#d4d4d4"
-        dark: "#ebebec"
-        secondary: "#7b97aa"
-        tertiary: "#84a59d"
-        highlight: rgba(143, 159, 169, 0.15)
-        textHighlight: "#b3aa0288"
+        light: "#211E2B"
+        lightgray: "#362F45"
+        gray: "#7A6F94"
+        darkgray: "#B7ACD1"
+        dark: "#F0EAF7"
+        secondary: "#C3A8F0"
+        tertiary: "#F5B8C9"
+        highlight: "#3D2E3A"
+        textHighlight: "#C3A8F055"
 plugins:
   - source: "@quartz-community/created-modified-date"
     enabled: true
@@ -103,8 +103,15 @@ plugins:
   - source: "@quartz-community/roam"
     enabled: false
     order: 92
+  # 이 플러그인은 theme.typography를 읽지 않고 자기 options만 본다.
+  # 비워두면 Quartz 기본 폰트(Schibsted Grotesk 등)를 별도로 받아오므로
+  # theme.typography와 동일하게 맞춰준다.
   - source: "@quartz-community/quartz-fonts"
     enabled: true
+    options:
+      header: Space Grotesk
+      body: Inter
+      code: JetBrains Mono
   - source: "@quartz-themes/core"
     enabled: false
     options:
@@ -153,6 +160,9 @@ plugins:
     layout:
       position: right
       priority: 10
+      # 홈페이지에서는 사이드바 그래프를 숨기고, 대신 quartz.ts에서
+      # 메인 콘텐츠 영역에 큰 그래프를 렌더링한다.
+      condition: not-index
   - source: "@quartz-community/search"
     enabled: true
     layout:
@@ -283,11 +293,12 @@ layout:
         left: []
         right: []
     content: {}
+    # 이 vault는 상위 개념 노트를 `폴더/폴더.md`로 두므로(CLAUDE.md 규칙)
+    # 폴더 페이지도 실제 내용이 있는 노트다. 기본값의 `right: []`를 지워
+    # 다른 노트처럼 그래프·백링크가 보이게 한다.
     folder:
       exclude:
         - reader-mode
-      positions:
-        right: []
     tag:
       exclude:
         - reader-mode

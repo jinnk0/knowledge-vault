@@ -142,8 +142,11 @@ plugins:
     enabled: true
   - source: "@quartz-community/folder-page"
     enabled: true
+  # 태그 페이지를 만들면 tags/* 가 contentIndex에 들어가고, 링크가 없는 탓에
+  # 그래프에 고립된 노드로 떠버린다. 태그 페이지를 쓰지 않으므로 끈다.
+  # (목록의 #태그 칩은 링크가 깨지므로 custom.scss에서 숨긴다)
   - source: "@quartz-community/tag-page"
-    enabled: true
+    enabled: false
   - source: "@quartz-community/explorer"
     enabled: true
     layout:

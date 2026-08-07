@@ -3,7 +3,11 @@
 // ---------------------------------------------------------------------------
 // 1. 본문 가독성 — 줄간격을 여유있게
 // ---------------------------------------------------------------------------
-.page > #quartz-body .center {
+// 주의: .center 전체에 걸면 폴더 페이지의 목록(.page-listing)까지 잡힌다.
+// 그쪽은 .section-li > .section .meta 같은 그리드 정렬용 margin을 쓰는데,
+// #quartz-body(id)가 들어간 선택자가 명시도에서 이겨 정렬이 깨진다.
+// 그래서 본문 산문(article) 안으로만 한정한다.
+.page > #quartz-body .center > article {
   & p,
   & li,
   & blockquote {
@@ -16,6 +20,28 @@
 
   & li {
     margin: 0.4em 0;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 1-b. 폴더 페이지 목록(.page-listing) 정리
+//   - 날짜 칸이 fit-content(8em)이라 한글 날짜가 두 줄로 접힌다 → 칸을 넓히고 nowrap
+//   - 태그 <ul>에 list-style 해제가 없어 ○ 불릿이 그대로 보인다 → 칩처럼 정리
+// 주의: Quartz 기본 스타일은 @layer quartz-base 안에 있고 이 파일은 레이어 밖이라
+//       명시도와 무관하게 항상 이 규칙이 이긴다. 그래서 선택자를 좁게 유지한다.
+// ---------------------------------------------------------------------------
+li.section-li > .section {
+  grid-template-columns: fit-content(12em) 3fr auto;
+  align-items: baseline;
+  column-gap: 1rem;
+
+  & .meta {
+    white-space: nowrap;
+  }
+
+  // tag-page 플러그인을 껐으므로 태그 칩은 갈 곳이 없는 링크가 된다 → 숨긴다.
+  & > ul.tags {
+    display: none;
   }
 }
 

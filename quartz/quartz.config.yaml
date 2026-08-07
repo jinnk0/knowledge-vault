@@ -147,6 +147,9 @@ plugins:
     options:
       localGraph:
         focusOnHover: true
+        showTags: false
+      globalGraph:
+        showTags: false
     layout:
       position: right
       priority: 10
@@ -241,7 +244,7 @@ plugins:
         - tags
         - aliases
       excludedProperties: []
-      hidePropertiesView: false
+      hidePropertiesView: true
       delimiters: ---
       language: yaml
     order: 5

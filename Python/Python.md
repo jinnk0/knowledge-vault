@@ -1,7 +1,7 @@
 ---
 created: 2026-08-07
 tags: []
-public: true
+publish: true
 ---
 
 Python은 객체 지향 언어이며, 정적 타입(statically typed) 언어가 아니다. 변수를 사용하기 전에 선언하거나 타입을 지정할 필요가 없으며, Python의 모든 변수는 객체다.

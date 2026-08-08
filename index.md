@@ -12,3 +12,4 @@ publish: true
 ## 주제
 
 - [[Python/Python.md|Python]]
+- [[NumPy/NumPy.md|NumPy]]

@@ -16,4 +16,3 @@ Python은 객체 지향 언어이며, 정적 타입(statically typed) 언어가 
 - [[Python/입출력.md|입출력]]
 - [[Python/컬렉션/컬렉션.md|컬렉션]]
 - [[Python/클래스와 객체.md|클래스와 객체]]
-- [[Python/NumPy 배열.md|NumPy 배열]]

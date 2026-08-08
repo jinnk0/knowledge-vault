@@ -158,6 +158,10 @@ plugins:
       localGraph:
         focusOnHover: true
         showTags: false
+        # 기본값(1)이면 기본 줌 배율에서 라벨 alpha가 0에 가까워 이름이 거의
+        # 안 보인다. 홈페이지 히어로 그래프와 동일하게 올려서, quartz.ts의
+        # wheel-nudge 한 번으로도 하위 노드 이름이 또렷이 보이게 한다.
+        opacityScale: 5
       globalGraph:
         showTags: false
     layout:

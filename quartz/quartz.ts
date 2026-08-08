@@ -46,6 +46,10 @@ const HomeGraph = ConditionalRender({
 // 즉 사용자가 확대/드래그하기 전까지는 이름이 절대 안 보인다.
 // 그래서 그래프가 그려진 직후 wheel 이벤트를 한 번 흘려보내 라벨을 띄운다.
 //
+// 홈페이지 히어로 그래프뿐 아니라 다른 노트 페이지의 사이드바 그래프도 같은
+// 컴포넌트(@quartz-community/graph)를 쓰므로 동일한 문제를 겪는다. 그래서
+// 페이지에 있는 ".graph-container"를 전부 찾아 각각 한 번씩 nudge한다.
+//
 // 이건 플러그인 내부 동작에 기대는 우회책이라, Quartz를 올릴 때 동작이 바뀌면
 // 이 스크립트만 무력화되고 그래프 자체는 그대로 동작하도록 방어적으로 작성했다.
 //
@@ -54,25 +58,37 @@ const HomeGraph = ConditionalRender({
 // 그래서 아무것도 렌더링하지 않는 별도 컴포넌트로 분리한다.
 const graphZoomNudgeScript = `
 ;(function () {
+  var nudged = new WeakSet()
   function nudgeOnce() {
-    var container = document.querySelector(".page-header .graph-container")
-    if (!container) return true // 홈페이지가 아니면 할 일 없음
-    var canvas = container.querySelector("canvas")
-    if (!canvas) return false // 아직 그리는 중
-    var rect = canvas.getBoundingClientRect()
-    if (!rect.width || !rect.height) return false
-    try {
-      canvas.dispatchEvent(
-        new WheelEvent("wheel", {
-          deltaY: -200,
-          bubbles: true,
-          cancelable: true,
-          clientX: rect.left + rect.width / 2,
-          clientY: rect.top + rect.height / 2,
-        }),
-      )
-    } catch (e) {}
-    return true
+    var containers = document.querySelectorAll(".graph-container")
+    if (!containers.length) return true // 그래프가 없는 페이지
+    var pending = false
+    containers.forEach(function (container) {
+      var canvas = container.querySelector("canvas")
+      if (!canvas) {
+        pending = true // 아직 그리는 중
+        return
+      }
+      if (nudged.has(canvas)) return // 이미 nudge한 캔버스
+      var rect = canvas.getBoundingClientRect()
+      if (!rect.width || !rect.height) {
+        pending = true
+        return
+      }
+      nudged.add(canvas)
+      try {
+        canvas.dispatchEvent(
+          new WheelEvent("wheel", {
+            deltaY: -200,
+            bubbles: true,
+            cancelable: true,
+            clientX: rect.left + rect.width / 2,
+            clientY: rect.top + rect.height / 2,
+          }),
+        )
+      } catch (e) {}
+    })
+    return !pending
   }
   function run() {
     var tries = 0
@@ -89,7 +105,15 @@ const GraphZoomNudge: QuartzComponent = () => null
 GraphZoomNudge.afterDOMLoaded = graphZoomNudgeScript
 
 // beforeBody 끝에 붙이면 제목/메타 아래, 본문 위에 그래프가 들어간다.
-// isIndex 조건 때문에 홈이 아니면 null을 렌더링하므로 다른 페이지엔 영향이 없다.
+// HomeGraph는 isIndex 조건 때문에 홈이 아니면 아무것도 렌더링하지 않고,
+// GraphZoomNudge도 페이지에 ".graph-container"가 없으면 조용히 끝난다.
+// 그래서 모든 페이지 타입에 똑같이 붙여도 다른 페이지엔 영향이 없다.
+//
+// content 타입에만 붙였던 적이 있었는데, 이 vault는 상위 개념 노트를
+// `폴더/폴더.md`로 두는 규칙(CLAUDE.md) 때문에 그래프가 가장 필요한
+// 페이지(하위 노트가 있는 노트)가 오히려 folder 타입으로 렌더링된다.
+// 그래서 folder를 포함한 모든 타입에 적용해야 사이드바 그래프 라벨이
+// 정상적으로 보인다.
 const withHomeGraph = (l: Partial<FullPageLayout>): Partial<FullPageLayout> => ({
   ...l,
   beforeBody: [...(l.beforeBody ?? []), HomeGraph, GraphZoomNudge],
@@ -100,7 +124,7 @@ const patchedLayout = {
   byPageType: Object.fromEntries(
     Object.entries(baseLayout.byPageType).map(([pageType, pageLayout]) => [
       pageType,
-      pageType === "content" ? withHomeGraph(pageLayout) : pageLayout,
+      withHomeGraph(pageLayout),
     ]),
   ),
 }
@@ -111,7 +135,9 @@ const patchedLayout = {
 // 수정된 레이아웃으로 교체한다. build.ts는 이 파일의 default export를 그대로 쓴다.
 const dispatcherIndex = config.plugins.emitters.findIndex((e) => e.name === "PageTypeDispatcher")
 if (dispatcherIndex === -1) {
-  throw new Error("PageTypeDispatcher를 emitters에서 찾지 못했다 — Quartz 내부 구조가 바뀌었는지 확인 필요")
+  throw new Error(
+    "PageTypeDispatcher를 emitters에서 찾지 못했다 — Quartz 내부 구조가 바뀌었는지 확인 필요",
+  )
 }
 config.plugins.emitters[dispatcherIndex] = PageTypeDispatcher(patchedLayout)
 

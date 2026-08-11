@@ -13,3 +13,4 @@ publish: true
 
 - [[Python/Python.md|Python]]
 - [[NumPy/NumPy.md|NumPy]]
+- [[코드 품질/코드 품질.md|코드 품질]]

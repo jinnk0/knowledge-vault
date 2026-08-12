@@ -1,6 +1,6 @@
 ---
 created: 2026-08-07
-tags: []
+tags: [프로그래밍언어]
 publish: true
 ---
 
@@ -15,5 +15,4 @@ Python은 객체 지향 언어이며, 정적 타입(statically typed) 언어가 
 - [[Python/함수.md|함수]]
 - [[Python/자료형/자료형.md|자료형]]
 - [[Python/입출력.md|입출력]]
-- [[Python/컬렉션/컬렉션.md|컬렉션]]
 - [[Python/클래스와 객체.md|클래스와 객체]]

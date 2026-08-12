@@ -14,3 +14,4 @@ publish: true
 - [[Python/Python.md|Python]]
 - [[NumPy/NumPy.md|NumPy]]
 - [[코드 품질/코드 품질.md|코드 품질]]
+- [[추상화 계층.md|추상화 계층]]

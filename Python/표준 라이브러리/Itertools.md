@@ -1,10 +1,10 @@
 ---
 created: 2026-08-12
-tags: [python, iterator]
+tags: [python, 표준라이브러리, iterator]
 publish: true
 ---
 
-[[Python/Python.md|Python]] 표준 라이브러리 모듈인 **Itertools**는 반복자(iterator)에 적용되어 복잡한 반복자를 생성하는 다양한 함수를 제공한다. 그 자체로 사용되거나 여러 함수를 조합해 반복자 대수(iterator algebra)를 구성하는, 빠르고 메모리 효율적인 도구로 쓰인다.
+[[Python/표준 라이브러리/표준 라이브러리.md|표준 라이브러리]]에 속하는 모듈인 **Itertools**는 반복자(iterator)에 적용되어 복잡한 반복자를 생성하는 다양한 함수를 제공한다. 그 자체로 사용되거나 여러 함수를 조합해 반복자 대수(iterator algebra)를 구성하는, 빠르고 메모리 효율적인 도구로 쓰인다.
 
 Itertools가 제공하는 반복자는 무한 반복자(Infinite Iterators), 조합 반복자(Combinatoric Iterators), 종결 반복자(Terminating Iterators) 세 가지로 나뉜다.
 

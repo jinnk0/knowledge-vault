@@ -1,10 +1,10 @@
 ---
 created: 2026-08-12
-tags: [python, 자료구조]
+tags: [python, 표준라이브러리, 자료구조]
 publish: true
 ---
 
-[[Python/Python.md|Python]] 표준 라이브러리 모듈인 **Collections**는 튜플, 리스트, 딕셔너리 같은 기본 [[Python/자료형/컬렉션/컬렉션.md|컬렉션]]을 보완하는 다양한 컨테이너 타입을 제공한다.
+[[Python/표준 라이브러리/표준 라이브러리.md|표준 라이브러리]]에 속하는 모듈인 **Collections**는 튜플, 리스트, 딕셔너리 같은 기본 [[Python/자료형/컬렉션/컬렉션.md|컬렉션]]을 보완하는 다양한 컨테이너 타입을 제공한다.
 
 ## Counter
 

@@ -116,3 +116,53 @@ print(list(combinations_with_replacement([1, 2], 2)))
 print(list(combinations_with_replacement(range(2), 1)))
 # 출력: [(0,), (1,)]
 ```
+
+## 종결 반복자 (Terminating Iterators)
+
+종결 반복자(Terminating Iterators)는 짧은 입력 시퀀스를 처리해, 사용된 메서드의 기능에 따라 출력을 생성하는 반복자다.
+
+**`accumulate(iter, func)`**: 대상 이터러블과 각 값에 적용할 함수를 인자로 받아 누적 결과를 생성한다. 함수를 전달하지 않으면 기본으로 덧셈이 수행되며, 입력 이터러블이 비어 있으면 출력도 비어 있다.
+
+```python
+import itertools
+import operator
+
+my_arr = [1, 4, 5, 7]
+
+# accumulate() 사용: 요소들의 연속적인 합계를 출력
+print(list(itertools.accumulate(my_arr)))
+# 출력: [1, 5, 10, 17]
+```
+
+**`chain(iter1, iter2, ...)`**: 인자로 전달한 여러 이터러블의 값을 순서대로 이어서 출력한다.
+
+```python
+import itertools
+
+arr1 = [1, 4, 5, 7]
+arr2 = [1, 6, 5, 9]
+arr3 = [8, 10, 5, 4]
+
+# chain()을 사용하여 리스트의 모든 요소 출력
+print(list(itertools.chain(arr1, arr2, arr3)))
+# 출력: [1, 4, 5, 7, 1, 6, 5, 9, 8, 10, 5, 4]
+```
+
+**`tee(iterator, count)`**: 하나의 이터레이터를 인자로 지정한 개수만큼의 독립된 이터레이터로 분할한다.
+
+```python
+import itertools
+
+arr = [2, 4, 6, 7, 8, 10, 20]
+iti = iter(arr)
+
+# tee()를 사용하여 동일한 값을 가진 3개의 반복자 생성
+it = itertools.tee(iti, 3)
+
+for i in range(0, 3):
+    print(list(it[i]))
+# 출력:
+# [2, 4, 6, 7, 8, 10, 20]
+# [2, 4, 6, 7, 8, 10, 20]
+# [2, 4, 6, 7, 8, 10, 20]
+```

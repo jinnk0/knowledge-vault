@@ -126,7 +126,7 @@ print(dot_product)
 
 ## deque
 
-`deque`(Doubly Ended Queue)는 컨테이너의 양쪽 끝에서 `append`, `pop` 연산을 빠르게 수행할 수 있도록 최적화된 자료구조다. [[Python/자료형/컬렉션/리스트.md|리스트]]의 시간 복잡도가 $O(n)$인 것에 비해, `deque`는 $O(1)$의 시간 복잡도를 제공한다.
+`deque`(Doubly Ended Queue)는 컨테이너의 양쪽 끝에서 `append`, `pop` 연산을 빠르게 수행할 수 있도록 최적화된 자료구조다. [[Python/자료형/컬렉션/리스트.md|리스트]]는 오른쪽 끝에서의 추가·제거는 $O(1)$이지만 왼쪽 끝에서는 요소를 모두 옮겨야 해 $O(n)$이 걸리는 반면, `deque`는 양쪽 끝 모두에서 $O(1)$의 시간 복잡도를 제공한다. (출처: [Python 공식 문서 - collections.deque](https://docs.python.org/3/library/collections.html#collections.deque))
 
 ```python
 from collections import deque

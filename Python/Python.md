@@ -9,8 +9,7 @@ Python은 객체 지향 언어이며, 정적 타입(statically typed) 언어가 
 ## 하위 개념
 
 - [[Python/연산자.md|연산자]]
-- [[Python/조건문.md|조건문]]
-- [[Python/반복문.md|반복문]]
+- [[Python/제어문/제어문.md|제어문]]
 - [[Python/표준 라이브러리/표준 라이브러리.md|표준 라이브러리]]
 - [[Python/함수.md|함수]]
 - [[Python/자료형/자료형.md|자료형]]

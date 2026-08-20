@@ -55,7 +55,7 @@ print(list(itertools.repeat(25, 4)))
 
 ## 조합 반복자 (Combinatoric Iterators)
 
-순열, 조합, 데카르트 곱(Cartesian product)과 같은 조합론적 구조를 단순화하는 데 쓰이는 재귀적 제너레이터를 조합 반복자라 한다. Python은 네 가지 조합 반복자를 제공한다.
+순열, 조합, 데카르트 곱(Cartesian product)과 같은 조합론적 구조를 단순화하는 데 쓰이는 재귀적 제너레이터를 조합 반복자라 한다. [[Python/Python.md|Python]]은 네 가지 조합 반복자를 제공한다.
 
 **`product(*iterables, repeat=1)`**: 입력받은 반복 가능 객체(iterable)들의 데카르트 곱을 계산한다. 반복 가능 객체 자신과의 곱을 계산할 때는 `repeat` 키워드 인자로 반복 횟수를 지정한다. 결과는 정렬된 순서의 튜플로 반환된다.
 

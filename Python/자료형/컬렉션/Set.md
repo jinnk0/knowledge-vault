@@ -54,7 +54,7 @@ my_set.discard('five')  # 오류 없음
 
 ### 합집합
 
-`.union()`은 Set과 다른 반복 가능한(iterable) 객체의 합집합을 반환한다. Set끼리는 `|` 연산자도 쓸 수 있다. 두 방식 모두 기존 Set을 변경하지 않는다.
+`.union()`은 Set과 다른 반복 가능한(iterable) 객체의 합집합을 반환한다. Set끼리는 `|` [[Python/연산자.md|연산자]]도 쓸 수 있다. 두 방식 모두 기존 Set을 변경하지 않는다.
 
 ```python
 s = set("Scaler")

@@ -53,6 +53,16 @@ print(d)
 
 `OrderedDict`는 키가 처음 삽입된 순서를 기억하는 딕셔너리다. 새 항목이 기존 항목의 값을 덮어써도 기존의 삽입 위치는 그대로 유지된다.
 
+파이썬 3.7부터는 일반 [[Python/자료형/컬렉션/딕셔너리.md|딕셔너리]]도 언어 차원에서 삽입 순서를 보장하도록 바뀌어서, `OrderedDict`가 아니어도 순서가 유지된다. (출처: Python 공식 문서 - What's New In Python 3.7) 다만 순서를 다루는 세부 동작에는 여전히 차이가 있다.
+
+| 구분 | 일반 dict / defaultdict | OrderedDict |
+|---|---|---|
+| 순서 보장 여부 | 삽입 순서 보장 (Python 3.7+) | 삽입 순서 보장 |
+| 순서 동등성 비교 (`==`) | 순서 무시, 내용만 비교 | 순서까지 일치해야 `True` |
+| 순서 재배치 메서드 | 없음 | `move_to_end()`, `popitem(last=False)` 제공 |
+| 메모리 / 성능 | 상대적으로 가볍고 빠름 | 추가 기능으로 메모리 사용량이 약간 더 큼 |
+| 주요 사용 목적 | 일반적인 데이터 저장, 자동 기본값 세팅 | LRU 캐시, 순서 기반 알고리즘, 순서를 엄격히 비교해야 하는 경우 |
+
 ```python
 from collections import OrderedDict
 
@@ -65,7 +75,7 @@ d['d'] = 4
 
 for key, value in d.items():
     print(key, value)
-# 무작위 순서로 출력될 수 있다.
+# 삽입한 순서(b, a, c, d) 그대로 출력된다.
 
 # OrderedDict
 od = OrderedDict()
@@ -76,7 +86,21 @@ od['d'] = 4
 
 for key, value in od.items():
     print(key, value)
-# 키가 삽입된 순서대로 유지된다.
+# 마찬가지로 삽입된 순서대로 유지된다.
+```
+
+두 자료형의 차이는 순서까지 비교하는 동등성 비교에서 드러난다. 같은 키와 값을 다른 순서로 담고 있을 때, 일반 딕셔너리는 내용만 같으면 같다고 판단하지만 `OrderedDict`는 순서가 다르면 다르다고 판단한다.
+
+```python
+d1 = {'a': 1, 'b': 2}
+d2 = {'b': 2, 'a': 1}
+print(d1 == d2)
+# 출력: True (순서 무시)
+
+od1 = OrderedDict([('a', 1), ('b', 2)])
+od2 = OrderedDict([('b', 2), ('a', 1)])
+print(od1 == od2)
+# 출력: False (순서까지 비교)
 ```
 
 ## ChainMap

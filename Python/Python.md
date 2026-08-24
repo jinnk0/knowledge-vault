@@ -15,3 +15,4 @@ Python은 객체 지향 언어이며, 정적 타입(statically typed) 언어가 
 - [[Python/자료형/자료형.md|자료형]]
 - [[Python/입출력.md|입출력]]
 - [[Python/클래스와 객체.md|클래스와 객체]]
+- [[Python/예외 처리.md|예외 처리]]

@@ -14,4 +14,4 @@ publish: true
 - [[Python/Python.md|Python]]
 - [[NumPy/NumPy.md|NumPy]]
 - [[클린 코드/클린 코드.md|클린 코드]]
-- [[시간 복잡도.md|시간 복잡도]]
+- [[복잡도/복잡도.md|복잡도]]

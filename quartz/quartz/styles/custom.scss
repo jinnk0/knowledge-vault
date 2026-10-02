@@ -84,6 +84,45 @@ $panel-radius: 8px;
   }
 }
 
+// ---------------------------------------------------------------------------
+// 3-b. 오른쪽 사이드바를 통째로 스크롤 (화면이 작으면 목차·백링크가 잘리는 문제)
+//   데스크톱에서 사이드바는 height: 100vh + sticky라서, 넘친 부분은 페이지를
+//   스크롤해도 닿을 수 없다. 기본 스타일은 이를 피하려고 각 칸(그래프·목차·백링크)을
+//   줄이고 칸 안에서 스크롤시키는데, 화면이 낮으면 칸이 너무 작아져 내용이 안 보인다.
+//   → 칸은 줄이지 않고 내용 크기 그대로 두고, 사이드바 전체가 한 번에 스크롤되게 한다.
+//   (태블릿/모바일은 사이드바가 sticky가 아니고 목차도 숨겨지므로 데스크톱만)
+// ---------------------------------------------------------------------------
+@media all and ($desktop) {
+  .page > #quartz-body .sidebar.right {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+
+    // 어떤 칸도 줄어들지 않고, 높이 상한도 두지 않는다.
+    & > * {
+      flex: 0 0 auto;
+      min-height: auto;
+      max-height: none;
+      overflow: visible;
+    }
+
+    // 목록도 칸 안에서 따로 스크롤하지 않고 전부 펼친다.
+    // 목록 끝을 흐리게 하는 그라데이션(.gradient-active)도 끈다.
+    & > .toc > ul.overflow,
+    & > .backlinks > ul.overflow {
+      max-height: none;
+      overflow: visible;
+      mask-image: none;
+    }
+
+    // 기본 스타일은 접힌 목차를 flex-basis 1.4rem + overflow hidden으로 잘라서
+    // 숨긴다. 위에서 flex·overflow를 덮어썼으므로 접힌 목록은 직접 숨긴다.
+    & > .toc > ul.toc-content.collapsed {
+      display: none;
+    }
+  }
+}
+
 // 그래프 컴포넌트가 자체 border/radius를 갖고 있어서, 카드 안에서는 중복된다.
 // 안쪽 테두리는 지우고 바깥 카드 테두리만 남긴다.
 .graph > .graph-outer {

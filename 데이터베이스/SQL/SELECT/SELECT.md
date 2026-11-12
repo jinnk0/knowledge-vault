@@ -24,6 +24,18 @@ FROM 테이블명;
 SELECT DISTINCT 부서번호 FROM 사원;  -- 부서번호가 겹치는 행은 한 번만 출력된다
 ```
 
+SELECT 절과 FROM 절은 필수이므로, 생략하면 에러가 발생한다. 반면 [[데이터베이스/SQL/SELECT/WHERE 절.md|WHERE 절]]은 필수가 아니므로 생략할 수 있으며, 생략하면 테이블의 모든 행이 조회된다.
+
+> FROM 절을 반드시 써야 하는지는 DBMS마다 다르다. SQL Server는 `SELECT GETDATE();`처럼 테이블 없이 식만 조회할 때 FROM 절을 생략할 수 있고, Oracle도 23ai부터는 테이블을 조회하지 않는 식만 SELECT할 때 FROM 절을 생략할 수 있다. 그 이전 버전의 Oracle에서는 아래의 DUAL 테이블을 써서 FROM 절을 채운다. (출처: Microsoft Learn, Oracle Database 23ai SQL Language Reference)
+
+SELECT 절에 나열하는 컬럼 목록(SELECT List)에는 컬럼명뿐 아니라 서브쿼리도 사용할 수 있다.
+
+```sql
+SELECT 이름,
+       (SELECT 부서명 FROM 부서 WHERE 부서.부서번호 = 사원.부서번호) AS 부서명
+FROM 사원;
+```
+
 ## 전체 구조와 실행 순서
 
 [[데이터베이스/SQL/SELECT/WHERE 절.md|WHERE 절]], [[데이터베이스/SQL/SELECT/GROUP BY 절.md|GROUP BY 절]], [[데이터베이스/SQL/SELECT/ORDER BY 절.md|ORDER BY 절]]까지 모두 쓴 SELECT 문은 다음과 같은 형태다.

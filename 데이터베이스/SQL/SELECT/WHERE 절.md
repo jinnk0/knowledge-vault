@@ -4,7 +4,9 @@ tags: [데이터베이스, sql, select, sqld]
 publish: true
 ---
 
-WHERE 절은 [[데이터베이스/SQL/SELECT/SELECT.md|SELECT]] 문에서 발췌 대상이 아닌 데이터를 제거해, 조건에 맞는 행만 남기는 절이다. FROM 절 다음에 위치한다.
+WHERE 절은 SQL을 이용하여 데이터베이스로부터 데이터를 검색할 때, 조회되어야 하는 데이터를 필터링하는 데 사용하는 절이다. [[데이터베이스/SQL/SELECT/SELECT.md|SELECT]] 문에서 발췌 대상이 아닌 데이터를 제거해 조건에 맞는 행만 남기며, FROM 절 다음에 위치한다. 필수 절이 아니므로 생략할 수 있다.
+
+WHERE 절에는 [[데이터베이스/SQL/함수/집계 함수.md|집계 함수]]를 사용할 수 없다. WHERE 절은 행을 그룹으로 묶기 전에 실행되기 때문이며, 집계 결과에 조건을 걸 때는 [[데이터베이스/SQL/SELECT/GROUP BY 절.md|HAVING 절]]을 쓴다.
 
 ## 조건식의 구성
 

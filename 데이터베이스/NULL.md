@@ -18,6 +18,24 @@ CREATE TABLE 사원 (
 );
 ```
 
+## 빈 문자열의 저장 방식
+
+빈 문자열('')을 입력했을 때 어떻게 저장되는지는 DBMS마다 다르다.
+
+| DBMS | ''을 입력했을 때 저장되는 값 |
+|---|---|
+| Oracle | NULL |
+| SQL Server | '' (빈 문자열) |
+
+그래서 Oracle에서는 빈 문자열을 넣은 행도 `WHERE 컬럼 = ''`로는 찾을 수 없고 `WHERE 컬럼 IS NULL`로 찾아야 한다. SQL Server에서는 빈 문자열과 NULL이 서로 다른 값으로 구분된다.
+
+```sql
+INSERT INTO 사원 (사원번호, 이름, 비고) VALUES (1, '김', '');
+
+SELECT * FROM 사원 WHERE 비고 IS NULL;  -- Oracle: 1건 조회, SQL Server: 0건 조회
+SELECT * FROM 사원 WHERE 비고 = '';     -- Oracle: 0건 조회, SQL Server: 1건 조회
+```
+
 ## 연산과 비교
 
 NULL이 포함된 사칙연산(+, -, *, / 등)의 결과는 NULL이다. 모르는 데이터에 숫자를 더하거나 빼도 결과는 여전히 모르는 데이터인 것과 같다.

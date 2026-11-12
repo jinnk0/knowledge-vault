@@ -24,19 +24,12 @@ SQL 문장은 하는 일에 따라 네 가지로 나뉜다.
 
 ## 순수 관계 연산자와 SQL
 
-관계형 데이터베이스의 순수 관계 연산자는 SQL에서 다음과 같이 구현된다.
-
-| 순수 관계 연산자 | SQL에서의 구현 |
-|---|---|
-| SELECT | WHERE 절 |
-| PROJECT | SELECT 절 |
-| (NATURAL) JOIN | 다양한 [[데이터베이스/SQL/조인.md|JOIN]] 기능 |
-| DIVIDE | 현재 사용되지 않음 |
-
-이름이 같아도 관계 연산자의 SELECT는 SQL의 SELECT 절이 아니라 WHERE 절에 대응하고, SQL의 SELECT 절에 대응하는 것은 PROJECT 연산이라는 점에 주의한다.
+관계대수의 순수 관계 연산자(SELECT, PROJECT, JOIN, DIVIDE)는 SQL에서 각각 WHERE 절, SELECT 절, 다양한 JOIN 기능으로 구현되며, DIVIDE는 현재 사용되지 않는다. 자세한 내용은 [[데이터베이스/SQL/순수 관계 연산자.md|순수 관계 연산자]] 노트에서 다룬다.
 
 ## 하위 개념
 
 - [[데이터베이스/SQL/SELECT/SELECT.md|SELECT]]
 - [[데이터베이스/SQL/조인.md|조인]]
 - [[데이터베이스/SQL/함수/함수.md|함수]]
+- [[데이터베이스/SQL/CASE 표현식.md|CASE 표현식]]
+- [[데이터베이스/SQL/순수 관계 연산자.md|순수 관계 연산자]]

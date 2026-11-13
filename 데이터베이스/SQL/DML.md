@@ -72,6 +72,6 @@ WHEN MATCHED THEN
 | 대상 | 조건에 맞는 행 (WHERE가 없으면 전체 행) | 전체 행 | 테이블 자체 |
 | Oracle에서 롤백 | 커밋 전 가능 | 불가 | 불가 |
 
-세 명령 중 DELETE만 DML이므로, Oracle에서는 커밋(COMMIT) 전에 롤백(ROLLBACK)할 수 있다. TRUNCATE와 DROP은 DDL이어서 실행하면 암시적 커밋(Implicit Commit)이 발생하므로 롤백할 수 없다.
+세 명령 중 DELETE만 DML이므로, Oracle에서는 커밋(COMMIT) 전에 롤백(ROLLBACK)할 수 있다. TRUNCATE와 DROP은 [[데이터베이스/SQL/DDL.md|DDL]]이어서 실행하면 암시적 커밋(Implicit Commit)이 발생하므로 롤백할 수 없다.
 
 > 클라이언트가 자동 커밋(Auto-commit)으로 설정된 상태라면, DML인 DELETE도 실행 즉시 커밋되므로 되돌릴 수 없다.

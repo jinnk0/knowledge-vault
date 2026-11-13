@@ -35,7 +35,7 @@ UPDATE나 DELETE에서 [[데이터베이스/SQL/SELECT/WHERE 절.md|WHERE 절]]�
 UPDATE 사원 SET 급여 = 0;
 ```
 
-자식 테이블이 참조하고 있는 부모 행을 DELETE할 때는 외래 키(FK)의 `ON DELETE CASCADE`, `ON DELETE SET NULL` 설정에 따라 처리되며, 이런 옵션이 없으면 삭제가 거부된다.
+자식 테이블이 참조하고 있는 부모 행을 DELETE할 때는 외래 키(FK)의 `ON DELETE CASCADE`, `ON DELETE SET NULL` 설정에 따라 처리되며, 이런 옵션이 없으면 삭제가 거부된다. 외래 키와 참조 무결성은 [[데이터베이스/SQL/제약조건.md|제약조건]] 노트에서 자세히 다룬다.
 
 ## MERGE
 

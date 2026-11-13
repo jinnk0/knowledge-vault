@@ -59,7 +59,7 @@ CTAS(`CREATE TABLE ... AS SELECT`)는 조회 결과를 그대로 새 테이블�
 CREATE TABLE 주문_백업 AS SELECT * FROM 주문;
 ```
 
-다만 Oracle의 CTAS는 대부분의 제약조건을 가져오지 않는다.
+다만 Oracle의 CTAS는 대부분의 [[데이터베이스/SQL/제약조건.md|제약조건]]을 가져오지 않는다.
 
 | 복제되는 것 | 복제되지 않는 것 |
 |---|---|
